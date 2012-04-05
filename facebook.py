@@ -391,9 +391,13 @@ class GraphAPIError(Exception):
         #self.type = type
         self.result = result
         try:
-            self.type = result["error_code"]
+           self.type = result['error']['type']
         except:
-            self.type = ""
+            try:
+                self.type = result["error_code"]
+            except:
+                self.type = ""
+
 
         # OAuth 2.0 Draft 10
         try:
